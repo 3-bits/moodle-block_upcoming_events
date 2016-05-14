@@ -57,12 +57,12 @@ class block_upcoming_events extends block_base {
             $courseshown = $this->page->course->id;
             $this->content->footer = '<div class="gotocal"><a class="btn button" href="'.$CFG->wwwroot.
                                      '/calendar/view.php?view=upcoming&amp;course='.$courseshown.'">'.
-                                      get_string('gotocalendar', 'calendar').'</a>...</div>';
+                                      get_string('gotocalendar', 'calendar').'</a></div>';
             $context = context_course::instance($courseshown);
             if (has_any_capability(array('moodle/calendar:manageentries', 'moodle/calendar:manageownentries'), $context)) {
-                $this->content->footer .= '<div class="newevent"><a class="btn button" href="'.$CFG->wwwroot.
+                $this->content->footer .= '<br><div class="newevent"><a class="btn button" href="'.$CFG->wwwroot.
                                           '/calendar/event.php?action=new&amp;course='.$courseshown.'">'.
-                                           get_string('newevent', 'calendar').'</a>...</div>';
+                                           get_string('newevent', 'calendar').'</a></div>';
             }
             if ($courseshown == SITEID) {
                 // Being displayed at site level. This will cause the filter to fall back to auto-detecting
@@ -92,7 +92,7 @@ class block_upcoming_events extends block_base {
         if (!empty($this->instance)) {
             $link = 'view.php?view=day&amp;course='.$courseshown.'&amp;';
             $showcourselink = ($this->page->course->id == SITEID);
-            $this->content->text = calendar_get_block_upcoming($events, $link, $showcourselink);
+            $this->content->text = get_upcoming_events($events, $link, $showcourselink);
         }
 
         if (empty($this->content->text)) {
@@ -101,6 +101,52 @@ class block_upcoming_events extends block_base {
 
         return $this->content;
     }
+}
+
+
+/**
+ * Get the upcoming event block
+ *
+ * @param array $events list of events
+ * @param moodle_url|string $linkhref link to event referer
+ * @param boolean $showcourselink whether links to courses should be shown
+ * @return string|null $content html block content
+ */
+function get_upcoming_events($events, $linkhref = NULL, $showcourselink = false) {
+    $content = '';
+    $lines = count($events);
+    if (!$lines) {
+        return $content;
+    }
+
+    for ($i = 0; $i < $lines; ++$i) {
+        if (!isset($events[$i]->time)) {   // Just for robustness
+            continue;
+        }
+        $events[$i] = calendar_add_event_metadata($events[$i]);
+        $content .= '<div class="event"><i class="fa fa-calendar fa-2x"></i>&nbsp;&nbsp;';
+        if (!empty($events[$i]->referer)) {
+            // That's an activity event, so let's provide the hyperlink
+            $content .= $events[$i]->referer;
+        } else {
+            if(!empty($linkhref)) {
+                $href = calendar_get_link_href(new moodle_url(CALENDAR_URL . $linkhref), 0, 0, 0, $events[$i]->timestart);
+                $href->set_anchor('event_'.$events[$i]->id);
+                $content .= html_writer::link($href, $events[$i]->name);
+            }
+            else {
+                $content .= $events[$i]->name;
+            }
+        }
+        $events[$i]->time = str_replace('&raquo;', '<br />&raquo;', $events[$i]->time);
+        if ($showcourselink && !empty($events[$i]->courselink)) {
+            $content .= html_writer::div($events[$i]->courselink, 'course');
+        }
+        $content .= '<div class="date">'.$events[$i]->time.'</div></div>';
+        if ($i < $lines - 1) $content .= '<hr />';
+    }
+
+    return $content;
 }
 
 

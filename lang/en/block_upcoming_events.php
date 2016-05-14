@@ -25,4 +25,4 @@
 
 $string['upcoming_events:addinstance'] = 'Add a new upcoming events block';
 $string['upcoming_events:myaddinstance'] = 'Add a new upcoming events block to Dashboard';
-$string['pluginname'] = 'Upcoming events';
+$string['pluginname'] = 'Upcoming Events';
