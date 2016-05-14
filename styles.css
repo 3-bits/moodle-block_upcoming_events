@@ -1,0 +1,6 @@
+.block_upcoming_events .event a {
+    font-size: 120% !important;
+}
+.dir-ltr .block_upcoming_events label#themeselectorselectlabel { margin-right: 4px; }
+.dir-rtl .block_upcoming_events label#themeselectorselectlabel { margin-left: 4px; }
+
