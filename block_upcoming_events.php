@@ -60,7 +60,7 @@ class block_upcoming_events extends block_base {
                                       get_string('gotocalendar', 'calendar').'</a></div>';
             $context = context_course::instance($courseshown);
             if (has_any_capability(array('moodle/calendar:manageentries', 'moodle/calendar:manageownentries'), $context)) {
-                $this->content->footer .= '<br><div class="newevent"><a class="btn button" href="'.$CFG->wwwroot.
+                $this->content->footer .= '<div class="newevent"><a class="btn button" href="'.$CFG->wwwroot.
                                           '/calendar/event.php?action=new&amp;course='.$courseshown.'">'.
                                            get_string('newevent', 'calendar').'</a></div>';
             }
@@ -133,6 +133,11 @@ function get_upcoming_events($events, $linkhref = NULL, $showcourselink = false)
                 $href = calendar_get_link_href(new moodle_url(CALENDAR_URL . $linkhref), 0, 0, 0, $events[$i]->timestart);
                 $href->set_anchor('event_'.$events[$i]->id);
                 $content .= html_writer::link($href, $events[$i]->name);
+                $content .= '<div class="eventdesc">';
+                $content .= html_writer::link($href, $events[$i]->description);
+                $content .= '</div">';
+
+
             }
             else {
                 $content .= $events[$i]->name;

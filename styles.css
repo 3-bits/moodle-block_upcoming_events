@@ -1,6 +1,20 @@
 .block_upcoming_events .event a {
-    font-size: 120% !important;
+    font-size: 150% !important;
 }
-.dir-ltr .block_upcoming_events label#themeselectorselectlabel { margin-right: 4px; }
-.dir-rtl .block_upcoming_events label#themeselectorselectlabel { margin-left: 4px; }
 
+.block_upcoming_events .eventdesc a p {
+    font-size: 85% !important;
+    margin: 5px 0 5px 32px;
+}
+
+.block_upcoming_events .date a,
+.block_upcoming_events .date .dimmed_text {
+    font-size: 100% !important;
+    margin-left: 30px;
+}
+
+.block_upcoming_events .gotocal a,
+.block_upcoming_events .newevent a {
+    margin-top: 10px;
+    font-size: 100% !important;
+}
