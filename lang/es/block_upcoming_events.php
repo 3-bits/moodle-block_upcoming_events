@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'block_calendar_upcoming', language 'en'
+ * Strings for component 'block_calendar_upcoming', language 'es'
  *
  * @package   block_upcoming_events
  * @copyright 2016 Fernando Acedo (3-bits.com)
@@ -23,6 +23,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['upcoming_events:addinstance'] = 'Add a new upcoming events block';
-$string['upcoming_events:myaddinstance'] = 'Add a new upcoming events block to Dashboard';
-$string['pluginname'] = 'Upcoming Events';
+$string['upcoming_events:addinstance'] = 'Añade un bloque de Próximos Eventos';
+$string['upcoming_events:myaddinstance'] = 'Añade un bloque de Próximos Eventos en el Área Personal';
+$string['pluginname'] = 'Próximos Eventos';
