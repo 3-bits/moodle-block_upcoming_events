@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016051500;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2016051501;        // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2015111600;        // Requires this Moodle version
 $plugin->component = 'block_upcoming_events'; // Full name of the plugin (used for diagnostics)
 $plugin->release   = 'v1.0';
